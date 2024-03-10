@@ -27,7 +27,7 @@ public class CategoryService {
         Sort sortObj = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
         Pageable pageable = PageRequest.of(page, size, sortObj);
         List<Category> categories = categoryRepository.findAll(pageable).getContent();
-        if (categories.size() == 0) {
+        if (categories.isEmpty()) {
             throw new ResourceNotFoundException("No categories found");
         }
         return categories;
@@ -37,7 +37,7 @@ public class CategoryService {
     public List<CategoryDto> getAllCategories() {
 
         List<Category> categories = categoryRepository.findAll();
-        if (categories.size() == 0) {
+        if (categories.isEmpty()) {
             throw new ResourceNotFoundException("No categories found");
         }
         return CategoryDto.entityToDto(categories);
@@ -49,7 +49,7 @@ public class CategoryService {
         Sort sortObj = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
         Pageable pageable = PageRequest.of(page, size, sortObj);
         List<Product> products = categoryRepository.findProductsByCategoryId(categoryId, pageable);
-        if (products.size() == 0) {
+        if (products.isEmpty()) {
             throw new ResourceNotFoundException("No products found");
         }
         return products;

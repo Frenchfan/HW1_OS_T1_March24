@@ -26,7 +26,7 @@ public class ProductService {
         Sort sortObj = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
         Pageable pageable = PageRequest.of(page, size, sortObj);
         List<Product> products = productRepository.findAll(pageable).getContent();
-        if (products.size() == 0) {
+        if (products.isEmpty()) {
             throw new ResourceNotFoundException("No products found");
         }
         return products;
@@ -39,7 +39,7 @@ public class ProductService {
         Sort sortObj = Sort.by(Sort.Direction.fromString(sortParams[1]), sortParams[0]);
         Pageable pageable = PageRequest.of(page, size, sortObj);
         List<Product> products = productRepository.getProductsByMaxPrice(maxPrice, pageable);
-        if (products.size() == 0) {
+        if (products.isEmpty()) {
             throw new ResourceNotFoundException("No products found");
         }
         return products;
