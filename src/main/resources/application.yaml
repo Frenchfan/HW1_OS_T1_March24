@@ -6,7 +6,7 @@ spring:
       lifecycle-management: start_only
 
   datasource:
-    url: jdbc:postgresql://localhost:5444/hw1?currentSchema=hw1
+    url: jdbc:postgresql://localhost:5445/hw1?currentSchema=hw1
     username: sumkin
     password: hw103032024
     driver-class-name: org.postgresql.Driver
@@ -30,4 +30,4 @@ spring:
 springdoc:
   override-with-generic-response: false
 server:
-  port: 8082
+  port: 8084

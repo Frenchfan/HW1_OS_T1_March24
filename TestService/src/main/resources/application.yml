@@ -1,6 +1,6 @@
 server:
   port: 8083
-myUrl: http://localhost:8082
+myUrl: http://localhost:8084
 
 
 
