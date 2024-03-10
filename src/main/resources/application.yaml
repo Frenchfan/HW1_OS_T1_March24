@@ -1,0 +1,33 @@
+
+spring:
+
+  docker:
+    compose:
+      lifecycle-management: start_only
+
+  datasource:
+    url: jdbc:postgresql://localhost:5444/hw1?currentSchema=hw1
+    username: sumkin
+    password: hw103032024
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        default_schema: hw1
+        format_sql: true
+        type: trace
+    show-sql: true
+
+  liquibase:
+    change-log: classpath:liquibase/changelog.yaml
+    enabled: true
+    default-schema: liquibase
+
+  preliquibase:
+    enabled: true
+
+springdoc:
+  override-with-generic-response: false
+server:
+  port: 8082

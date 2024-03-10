@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  postgres:
+    image: 'postgres:16.0'
+    container_name: 'postgres'
+    environment:
+      - 'POSTGRES_DB=hw1'
+      - 'POSTGRES_PASSWORD=hw103032024'
+      - 'POSTGRES_USER=sumkin'
+    ports:
+      - '5444:5432'
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'app'
+    ports:
+      - '8082:8082'
+    depends_on:
+      - 'postgres'
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hw1?currentSchema=hw1
+      SPRING_DATASOURCE_USERNAME: sumkin
+      SPRING_DATASOURCE_PASSWORD: hw103032024
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
+      SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA: hw1
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: true
+      SPRING_JPA_SHOW-SQL: true
+      SPRING_LIQUIBASE_CHANGE-LOG: classpath:liquibase/changelog.yaml
+      SPRING_LIQUIBASE_ENABLED: true
+      SPRING_LIQUIBASE_DEFAULT-SCHEMA: liquibase
+      SPRING_PRELIQUIBASE_ENABLED: true
+      SPRINGDOC_OVERRIDE-WITH-GENERIC-RESPONSE: false
+      SERVER_PORT: 8082
+
+  test-service:
+    build:
+      context: TestService
+      dockerfile: Dockerfile
+    container_name: 'test-service'
+    ports:
+      - '8083:8083'
+    environment:
+      SERVER_PORT: 8083
+      MYURL: http://app:8082
+    depends_on:
+      - 'app'
+    restart: on-failure
+
