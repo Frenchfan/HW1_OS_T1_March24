@@ -56,6 +56,4 @@ public class Product {
     
     @Schema(description = "Product review")
     private String review;
-
-
 }

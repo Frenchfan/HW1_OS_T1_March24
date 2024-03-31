@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
@@ -44,8 +45,10 @@ public class ControllerAdvice {
         ExceptionBody exceptionBody = new ExceptionBody("Validation failed");
         List<FieldError> errors = e.getBindingResult().getFieldErrors();
         exceptionBody.setErrors(errors.stream()
-                .collect(Collectors.toMap(FieldError::getField,
-                        FieldError::getDefaultMessage)));
+                .collect(Collectors.toMap(
+                        FieldError::getField,
+                        error -> Optional.ofNullable(error.getDefaultMessage()).orElse("Default message if null")
+                )));
         return exceptionBody;
     }
 
