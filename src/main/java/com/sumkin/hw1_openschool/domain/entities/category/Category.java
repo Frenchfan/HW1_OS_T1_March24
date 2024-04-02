@@ -6,8 +6,7 @@ import com.sumkin.hw1_openschool.domain.entities.product.Product;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import java.util.List;
 
@@ -15,6 +14,9 @@ import java.util.List;
 @Schema(description = "Category entity")
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
