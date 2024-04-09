@@ -7,8 +7,7 @@ import com.sumkin.hw1_openschool.domain.entities.category.Category;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import java.math.BigDecimal;
@@ -18,6 +17,9 @@ import java.math.BigDecimal;
 @Schema(description = "Product entity")
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Product {
 
     @Id
